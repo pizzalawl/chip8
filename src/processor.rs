@@ -6,6 +6,7 @@ use crate::font;
 
 pub const SCREEN_WIDTH: usize = 64;
 pub const SCREEN_HEIGHT: usize = 32;
+pub const SCALE: usize = 10;
 
 const RAM_SIZE: usize = 4096;
 const NUM_REGS: usize = 16;
