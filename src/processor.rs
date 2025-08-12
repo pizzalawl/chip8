@@ -16,7 +16,7 @@ const PROGRAM_START: usize = 0x200;
 
 pub struct Chip8 {
     memory: [u8; RAM_SIZE],
-    display: [bool; SCREEN_WIDTH * SCREEN_HEIGHT],
+    pub display: [bool; SCREEN_WIDTH * SCREEN_HEIGHT],
     keys: [bool; NUM_KEYS],
     pc: u16,
     i_reg: u16,

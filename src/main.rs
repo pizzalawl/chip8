@@ -1,7 +1,7 @@
 use std::env;
 use raylib::prelude::*;
 
-use crate::processor::{SCALE, SCREEN_HEIGHT, SCREEN_WIDTH};
+use crate::processor::{Chip8, SCALE, SCREEN_HEIGHT, SCREEN_WIDTH};
 
 pub mod font;
 pub mod processor;
@@ -17,7 +17,15 @@ fn main(){
         let mut d = rl.begin_drawing(&thread);
          
         d.clear_background(Color::WHITE);
-        d.draw_text("Hello, world!", 12, 12, 20, Color::BLACK);
+
+        for x in 0..SCREEN_WIDTH {
+            for y in 0..SCREEN_HEIGHT {
+                let idx = y * SCREEN_WIDTH + x;
+                if emulator.display[idx] == true {
+                    d.draw_rectangle( (x * SCALE) as i32, (y * SCALE) as i32, SCALE as i32, SCALE as i32, Color::BLACK);
+                }
+            }
+        }
 
         emulator.tick();
         emulator.tick_timers();
