@@ -2,11 +2,8 @@ use std::fs::File;
 use std::io::prelude::*;
 use std::path::Path;
 
+use crate::video::{SCREEN_HEIGHT, SCREEN_WIDTH};
 use crate::font;
-
-pub const SCREEN_WIDTH: usize = 64;
-pub const SCREEN_HEIGHT: usize = 32;
-pub const SCALE: usize = 10;
 
 const RAM_SIZE: usize = 4096;
 const NUM_REGS: usize = 16;
@@ -16,7 +13,7 @@ const PROGRAM_START: usize = 0x200;
 
 pub struct Chip8 {
     memory: [u8; RAM_SIZE],
-    pub display: [bool; SCREEN_WIDTH * SCREEN_HEIGHT],
+    display: [bool; SCREEN_WIDTH * SCREEN_HEIGHT],
     keys: [bool; NUM_KEYS],
     pc: u16,
     i_reg: u16,
@@ -73,6 +70,10 @@ impl Chip8 {
 
     pub fn dump_mem(&mut self){
         println!("{:x?}", self.memory);
+    }
+
+    pub fn get_display(&mut self) -> [bool; SCREEN_HEIGHT * SCREEN_WIDTH] {
+        self.display
     }
 
     pub fn load_file(&mut self, path: &str){
