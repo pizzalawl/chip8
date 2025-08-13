@@ -2,7 +2,7 @@ use std::fs::File;
 use std::io::prelude::*;
 use std::path::Path;
 
-use crate::video::{SCREEN_HEIGHT, SCREEN_WIDTH};
+use crate::display::{SCREEN_HEIGHT, SCREEN_WIDTH};
 use crate::font;
 
 const RAM_SIZE: usize = 4096;
@@ -74,6 +74,10 @@ impl Chip8 {
 
     pub fn get_display(&mut self) -> [bool; SCREEN_HEIGHT * SCREEN_WIDTH] {
         self.display
+    }
+
+    pub fn update_keys(&mut self, inputs: [bool; 16]) {
+        self.keys = inputs;
     }
 
     pub fn load_file(&mut self, path: &str){
