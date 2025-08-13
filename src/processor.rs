@@ -2,6 +2,7 @@ use std::fs::File;
 use std::io::prelude::*;
 use std::path::Path;
 
+use crate::audio::Audio;
 use crate::display::{SCREEN_HEIGHT, SCREEN_WIDTH};
 use crate::font;
 
@@ -105,14 +106,13 @@ impl Chip8 {
         self.execute(op);
     }
 
-    pub fn tick_timers(&mut self){
+    pub fn tick_timers(&mut self, audio_driver: &Audio){
         if self.delay_timer > 0 {
             self.delay_timer -= 1
         }
-
         if self.sound_timer > 0 {
             if self.sound_timer == 1 {
-                //BEEP
+                audio_driver.beep();
             }
             self.sound_timer -= 1
         }
